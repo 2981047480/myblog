@@ -1,10 +1,18 @@
 package user
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"vblog/common"
 )
+
+type UserService interface {
+	CreateUser(context.Context) error
+	DeleteUser(context.Context) error
+	ModifyUser(context.Context) error
+	QueryUser(context.Context) ([]User, error)
+}
 
 type UserRequest struct {
 	// 用户名
