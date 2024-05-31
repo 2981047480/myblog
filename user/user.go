@@ -56,7 +56,7 @@ func (u *User) String() string {
 	str, err := json.Marshal(u)
 	if err != nil {
 		log.Println(err)
-		return "111"
+		return ""
 	}
 	return string(str)
 }
