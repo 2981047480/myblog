@@ -1,10 +1,10 @@
 # mysql:
 addr: 127.0.0.1
 port: 3306
-password: "1234567890"
-username: admin
+password: "123456"
+username: root
 dbname: user
 charset: utf8mb4
 parsetime: "True"
-loc: Loc
+loc: Local
 # user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local
