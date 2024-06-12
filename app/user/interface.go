@@ -5,8 +5,12 @@ import (
 	"vblog/common"
 )
 
-type UserService interface {
-	CreateUser(ctx *context.Context, in *UserRequest) (*User, error)
+const (
+	AppName = "user"
+)
+
+type Service interface {
+	CreateUser(ctx *context.Context, in *CreateUserRequest) (*User, error)
 	QueryUser(ctx *context.Context, in *QueryUserRequest) *UserSet
 }
 

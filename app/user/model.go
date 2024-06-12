@@ -9,7 +9,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type UserRequest struct {
+type CreateUserRequest struct {
 	// 用户名
 	Username string `json:"username" gorm:"column:username"`
 	// 密码
@@ -19,7 +19,7 @@ type UserRequest struct {
 	Label map[string]string `json:"label" gorm:"column:label;serializer:json"`
 }
 
-func (u *UserRequest) Validator() error {
+func (u *CreateUserRequest) Validator() error {
 	if u.Username == "" {
 		return fmt.Errorf("用户名必填")
 	}
@@ -28,7 +28,7 @@ func (u *UserRequest) Validator() error {
 }
 
 // 对用户名做加密处理
-func (u *UserRequest) HashPassword() error {
+func (u *CreateUserRequest) HashPassword() error {
 	cyptoPass, err := bcrypt.GenerateFromPassword([]byte(u.Password), 10)
 	if err != nil {
 		return err
@@ -37,7 +37,7 @@ func (u *UserRequest) HashPassword() error {
 	return nil
 }
 
-func (u *UserRequest) ValidatePassword(password string) error {
+func (u *CreateUserRequest) ValidatePassword(password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
 }
 
@@ -51,11 +51,11 @@ func (u *UserRequest) ValidatePassword(password string) error {
 // role Role
 type User struct {
 	*common.Meta
-	*UserRequest
+	*CreateUserRequest
 }
 
-func CreateNewUserRequest() *UserRequest {
-	return &UserRequest{
+func CreateNewUserRequest() *CreateUserRequest {
+	return &CreateUserRequest{
 		Username: "default",
 		// Nickname: "default",
 		Password: "default",
@@ -64,10 +64,10 @@ func CreateNewUserRequest() *UserRequest {
 	}
 }
 
-func CreateNewUser(u *UserRequest) *User {
+func CreateNewUser(u *CreateUserRequest) *User {
 	return &User{
-		Meta:        common.CreateNewMeta(),
-		UserRequest: u,
+		Meta:              common.CreateNewMeta(),
+		CreateUserRequest: u,
 	}
 }
 

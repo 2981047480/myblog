@@ -6,23 +6,31 @@ import (
 	"log"
 	"vblog/app/user"
 	"vblog/common/config"
+	"vblog/ioc"
 
 	"gorm.io/gorm"
 )
 
 type UserServiceImpl struct {
 	database *gorm.DB
+	Test     string
 }
 
-func (u *UserServiceImpl) Init() {
+func init() {
+	ioc.ControllerImpl.Register(user.AppName, &UserServiceImpl{})
+}
+
+func (u *UserServiceImpl) Init() error {
 	var err error
 	u.database, err = config.ReadDBConf("/Users/zephyrzhao/Documents/vblog/myblog/common/config/db.yaml").GetConn()
 	if err != nil {
 		log.Println("get DB failed")
+		return err
 	}
+	return nil
 }
 
-func (u *UserServiceImpl) CreateUser(ctx *context.Context, in *user.UserRequest) (*user.User, error) {
+func (u *UserServiceImpl) CreateUser(ctx *context.Context, in *user.CreateUserRequest) (*user.User, error) {
 	// 校验请求合法性 这个后面补
 	if in.Username == "" {
 		return nil, fmt.Errorf("Username不能为空")

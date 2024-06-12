@@ -25,6 +25,8 @@ type Config struct {
 	*Database `yaml:"mysql"`
 }
 
+const DBConfigFile = "/Users/zephyrzhao/Documents/vblog/myblog/common/config/db.yaml"
+
 func ReadDBConf(file string) (c *Config) {
 	// fp, err := os.Open(file)
 	// if err != nil {
