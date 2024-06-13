@@ -8,6 +8,10 @@ import (
 	"github.com/rs/xid"
 )
 
+const (
+	AppName = "token"
+)
+
 type Token struct {
 	// 该Token是颁发
 	UserId int `json:"user_id" gorm:"column:user_id"`
@@ -32,7 +36,7 @@ type Token struct {
 
 	common.Print
 }
- 
+
 func NewToken(u user.User) *Token {
 	return &Token{
 		UserId:                u.Id,

@@ -11,7 +11,7 @@ const (
 
 type Service interface {
 	CreateUser(ctx *context.Context, in *CreateUserRequest) (*User, error)
-	QueryUser(ctx *context.Context, in *QueryUserRequest) *UserSet
+	QueryUser(ctx *context.Context, in *QueryUserRequest) (*UserSet, error)
 }
 
 func NewQueryUserRequest() *QueryUserRequest {

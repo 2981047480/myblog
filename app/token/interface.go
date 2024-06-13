@@ -14,8 +14,11 @@ type Service interface {
 	// token的验证
 }
 
-func IssueToken(ctx *context.Context, in *IssueTokenRequest) (*Token, error) {
-	return nil, nil
+func NewIssueTokenRequest(username string, password string) *IssueTokenRequest {
+	return &IssueTokenRequest{
+		Username: username,
+		Password: password,
+	}
 }
 
 type IssueTokenRequest struct {
