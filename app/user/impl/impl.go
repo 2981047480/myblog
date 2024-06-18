@@ -11,6 +11,15 @@ import (
 	"gorm.io/gorm"
 )
 
+var filename = "/Users/zephyrzhao/Documents/vblog/myblog/common/config/db.yaml"
+
+func NewUserServiceImpl() *UserServiceImpl {
+	db, _ := config.ReadDBConf(filename).GetConn()
+	return &UserServiceImpl{
+		database: db,
+	}
+}
+
 type UserServiceImpl struct {
 	database *gorm.DB
 	Test     string
@@ -22,7 +31,7 @@ func init() {
 
 func (u *UserServiceImpl) Init() error {
 	var err error
-	u.database, err = config.ReadDBConf("/Users/zephyrzhao/Documents/vblog/myblog/common/config/db.yaml").GetConn()
+	u.database, err = config.ReadDBConf(filename).GetConn()
 	if err != nil {
 		log.Println("get DB failed")
 		return err

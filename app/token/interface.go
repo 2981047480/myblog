@@ -27,8 +27,11 @@ type IssueTokenRequest struct {
 	IsRemember bool   `json:"is_remember"`
 }
 
-func RevolkToken(ctx *context.Context, in *IssueTokenRequest) (*Token, error) {
-	return nil, nil
+func NewRevolkTokenRequest(access_token string, refresh_token string) *RevolkTokenRequest {
+	return &RevolkTokenRequest{
+		Access_token:  access_token,
+		Refresh_token: refresh_token,
+	}
 }
 
 type RevolkTokenRequest struct {
@@ -36,8 +39,10 @@ type RevolkTokenRequest struct {
 	Refresh_token string `json:"refresh_token"`
 }
 
-func ValicateToken(ctx *context.Context, in *IssueTokenRequest) (*Token, error) {
-	return nil, nil
+func NewValicateTokenRequest(access_token string) *ValicateTokenRequest {
+	return &ValicateTokenRequest{
+		Access_token: access_token,
+	}
 }
 
 type ValicateTokenRequest struct {

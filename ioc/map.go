@@ -30,6 +30,6 @@ func (i *MapController) Init() error {
 			return fmt.Errorf("%s init ERROR, error:\n %v", name, err)
 		}
 	}
-	log.Panicln("Congradulactions, all model init done!")
+	log.Println("Congradulactions, all model init done!")
 	return nil
 }
