@@ -56,9 +56,9 @@ type User struct {
 
 func CreateNewUserRequest() *CreateUserRequest {
 	return &CreateUserRequest{
-		Username: "default",
+		Username: "admin",
 		// Nickname: "default",
-		Password: "default",
+		Password: "123456",
 		R:        visitor,
 		Label:    map[string]string{},
 	}

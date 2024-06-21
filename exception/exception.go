@@ -22,6 +22,4 @@ func (e *ApiException) Error() string {
 	return e.Message
 }
 
-func ErrNotFound(message string) *ApiException {
-	return NewApiException(404, message)
-}
+
