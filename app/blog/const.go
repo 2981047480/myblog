@@ -5,6 +5,6 @@ const (
 	STATUS_DRAFT int = iota
 	STATUS_PRIVATE
 	STATUS_PUBLISHD
-	TB_NAME = "blog"
+	TB_NAME         = "blogs"
+	COOKIE_BLOG_KEY = "blog"
 )
-

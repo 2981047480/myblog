@@ -61,6 +61,13 @@ func (r *CreateBlogRequest) Validate() error {
 	return common.Validate(r)
 }
 
+func NewChangeBlogStatusRequest(status int) *ChangeBlogStatusRequest {
+	return &ChangeBlogStatusRequest{
+		PublishAt: time.Now().Unix(),
+		Status:    status,
+	}
+}
+
 type ChangeBlogStatusRequest struct {
 	PublishAt int64 `json:"published_at" gorm:"column:published_at"`
 	Status    int   `json:"status" gorm:"column:status"`
