@@ -5,6 +5,7 @@ import (
 	_ "vblog/app/blog/api"
 	_ "vblog/app/blog/impl"
 	_ "vblog/app/token"
+	_ "vblog/app/token/api"
 	_ "vblog/app/token/impl"
 	_ "vblog/app/user"
 	_ "vblog/app/user/impl"

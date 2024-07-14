@@ -102,7 +102,6 @@ func ReadDBConf(file string) (c *Config) {
 
 	// decoder := yaml.NewDecoder()
 	err = yaml.Unmarshal([]byte(content), &c)
-	fmt.Println(c)
 	if err != nil {
 		log.Println(err)
 	}
