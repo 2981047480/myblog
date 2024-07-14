@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var filename = "/Users/zephyrzhao/Documents/vblog/myblog/common/config/db.yaml"
+var filename = "/Users/zephyrzhao/Documents/vblog/myblog/etc/db.yaml"
 
 func NewUserServiceImpl() *UserServiceImpl {
 	db, _ := config.ReadDBConf(filename).GetConn()

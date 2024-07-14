@@ -11,12 +11,11 @@ import (
 
 func (h *BlogApiHandler) Register(appRouter gin.IRouter) {
 	appRouter.POST("/", h.CreateBlog)
-	appRouter.PATCH("/")
-	appRouter.GET("/")
-	appRouter.PATCH("/:id")
-	appRouter.GET("/:id")
-	appRouter.POST("/:id")
-	appRouter.DELETE("/:id")
+	appRouter.GET("/", h.QueryBlog)
+	appRouter.PATCH("/:id", h.PatchUpdateBlog)
+	appRouter.GET("/:id", h.DescribeBlog)
+	appRouter.POST("/:id", h.PostUpdateBlog)
+	appRouter.DELETE("/:id", h.DeleteBlog)
 }
 
 func (h *BlogApiHandler) CreateBlog(ctx *gin.Context) {

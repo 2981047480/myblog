@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sync"
 
+	"github.com/gin-gonic/gin"
 	yaml "gopkg.in/yaml.v3"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -50,9 +52,41 @@ type Application struct {
 	Host   string `toml:"host" yaml:"host" json:"host"`
 	Port   int    `toml:"port" yaml:"port" json:"port"`
 	Domain string `toml:"domain" yaml:"domain" json:"domain"`
+
+	server *gin.Engine
+	lock   sync.Mutex
+	root   gin.IRouter
 }
 
-const DBConfigFile = "/Users/zephyrzhao/Documents/vblog/myblog/common/config/db.yaml"
+func (a *Application) Address() string {
+	return fmt.Sprintf("%s:%d", a.Host, a.Port)
+}
+
+func (a *Application) GinServer() *gin.Engine {
+	a.lock.Lock()
+	defer a.lock.Unlock()
+
+	if a.server == nil {
+		a.server = gin.Default()
+	}
+
+	return a.server
+}
+
+func (a *Application) GinRootRouter() gin.IRouter {
+	r := a.GinServer()
+
+	if a.root == nil {
+		a.root = r.Group("vblog").Group("api").Group("v1")
+	}
+
+	return a.root
+}
+
+func (a *Application) Start() error {
+	r := a.GinServer()
+	return r.Run(a.Address())
+}
 
 func ReadDBConf(file string) (c *Config) {
 	// fp, err := os.Open(file)
@@ -75,6 +109,14 @@ func ReadDBConf(file string) (c *Config) {
 	return c
 }
 
+func LoadFromYaml() error {
+	c := ReadDBConf(Filename)
+	if c == nil {
+		return fmt.Errorf("read config error")
+	}
+	return nil
+}
+
 func (c *Config) DSN() string {
 	connstr := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=%v&parseTime=%v&loc=%v",
 		c.Username, c.Password, c.Addr, c.Database.Port, c.DBname, c.Charset, c.ParseTime, c.Loc)
@@ -82,8 +124,8 @@ func (c *Config) DSN() string {
 }
 
 func (d *Config) GetConn() (*gorm.DB, error) {
-	d.lock.Lock()
-	defer d.lock.Unlock()
+	d.Database.lock.Lock()
+	defer d.Database.lock.Unlock()
 
 	if d.db != nil {
 		return d.db, nil

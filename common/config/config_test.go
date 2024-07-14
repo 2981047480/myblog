@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	config_file = "/Users/zephyrzhao/Documents/vblog/myblog/common/config/db.yaml"
+	config_file = "/Users/zephyrzhao/Documents/vblog/myblog/etc/db.yaml"
 )
 
 func TestConfig(t *testing.T) {

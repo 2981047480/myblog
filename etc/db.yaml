@@ -7,4 +7,8 @@ mysql:
   charset: utf8mb4
   parsetime: "True"
   loc: Local
+app:
+  host: 127.0.0.1
+  port: 8080
+  domain: "http://127.0.0.1"
 # user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local

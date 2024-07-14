@@ -12,6 +12,7 @@ func newMapController() *MapController {
 }
 
 type MapController struct {
+	name    string
 	storage map[string]Object
 }
 

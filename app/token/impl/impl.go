@@ -23,14 +23,14 @@ type TokenServiceImpl struct {
 }
 
 func NewServiceImpl(u *impl.UserServiceImpl) *TokenServiceImpl {
-	db, _ := config.ReadDBConf(config.DBConfigFile).GetConn()
+	db, _ := config.ReadDBConf(config.Filename).GetConn()
 	return &TokenServiceImpl{
 		DB:   db,
 		User: u,
 	}
 }
 func (i *TokenServiceImpl) Init() error {
-	db, _ := config.ReadDBConf(config.DBConfigFile).GetConn()
+	db, _ := config.ReadDBConf(config.Filename).GetConn()
 	i.DB = db
 	i.User = ioc.ControllerImpl.Get(user.AppName).(user.Service) // 这里没初始化user 前面的user是初始化过的 这里没初始化
 	return nil
