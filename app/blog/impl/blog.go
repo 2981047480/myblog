@@ -135,7 +135,7 @@ func (i *Blogimpl) UpdateBlogStatus(ctx context.Context, in *blog.UpdateBlogStat
 func (i *Blogimpl) QueryBlog(ctx context.Context, in *blog.QueryBlogRequest) (*blog.BlogSet, error) {
 	// 1、首先得有db对象
 	var err error
-	i.DB, err = config.ReadDBConf(config.Filename).GetConn()
+	i.DB, err = config.C().GetConn()
 	if err != nil {
 		fmt.Println(err)
 		return nil, err

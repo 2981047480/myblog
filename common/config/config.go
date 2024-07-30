@@ -109,7 +109,7 @@ func ReadDBConf(file string) (c *Config) {
 }
 
 func LoadFromYaml() error {
-	c := ReadDBConf(Filename)
+	c := C()
 	if c == nil {
 		return fmt.Errorf("read config error")
 	}

@@ -23,14 +23,14 @@ type TokenServiceImpl struct {
 }
 
 func NewServiceImpl(u *impl.UserServiceImpl) *TokenServiceImpl {
-	db, _ := config.ReadDBConf(config.Filename).GetConn()
+	db, _ := config.C().GetConn()
 	return &TokenServiceImpl{
 		DB:   db,
 		User: u,
 	}
 }
 func (i *TokenServiceImpl) Init() error {
-	db, _ := config.ReadDBConf(config.Filename).GetConn()
+	db, _ := config.C().GetConn()
 	i.DB = db
 	i.User = ioc.ControllerImpl.Get(user.AppName).(user.Service) // 这里没初始化user 前面的user是初始化过的 这里没初始化
 	return nil
@@ -109,5 +109,16 @@ func (i *TokenServiceImpl) ValicateToken(ctx *context.Context, in *token.Valicat
 	}
 
 	// 3、满足at和rt一致、且都未过期，可以把token返回出去，验证成功
+	// 补充一下 这里之前忘了给role值了 导致一直返回role为0了
+	queryuser := user.NewQueryUserRequest()
+	queryuser.Username = tk.UserName
+	u, err := i.User.QueryUser(ctx, queryuser)
+	if err != nil {
+		return nil, err
+	}
+	if u.Total == 0 || len(u.Items) == 0 {
+		return nil, fmt.Errorf("user not found")
+	}
+	tk.Role = u.Items[0].R
 	return tk, nil
 }

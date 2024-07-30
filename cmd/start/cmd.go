@@ -20,7 +20,7 @@ var Cmd = &cobra.Command{
 			configPath = config.Filename
 		}
 
-		cobra.CheckErr(config.ReadDBConf(configPath).Application.Start())
+		cobra.CheckErr(config.C().Application.Start())
 	},
 }
 

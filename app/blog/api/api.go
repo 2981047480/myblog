@@ -24,7 +24,7 @@ func (h *BlogApiHandler) Init() error {
 	h.svc = ioc.ControllerImpl.Get(blog.AppName).(blog.Service)
 
 	// 注册路由
-	subRouter := config.ReadDBConf(config.Filename).Application.GinRootRouter().Group("blogs")
+	subRouter := config.C().Application.GinRootRouter().Group("blogs")
 	h.Register(subRouter)
 	return nil
 }

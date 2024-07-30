@@ -59,7 +59,7 @@ func CreateNewUserRequest() *CreateUserRequest {
 		Username: "admin",
 		// Nickname: "default",
 		Password: "123456",
-		R:        visitor,
+		R:        Admin,
 		Label:    map[string]string{},
 	}
 }

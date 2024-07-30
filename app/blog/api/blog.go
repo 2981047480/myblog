@@ -3,25 +3,30 @@ package api
 import (
 	"strconv"
 	"vblog/app/blog"
+	"vblog/app/user"
 	"vblog/common"
+	"vblog/middleware"
 	"vblog/response"
 
 	"github.com/gin-gonic/gin"
 )
 
 func (h *BlogApiHandler) Register(appRouter gin.IRouter) {
-	appRouter.POST("/", h.CreateBlog)
 	appRouter.GET("/", h.QueryBlog)
-	appRouter.PATCH("/:id", h.PatchUpdateBlog)
 	appRouter.GET("/:id", h.DescribeBlog)
-	appRouter.POST("/:id", h.PostUpdateBlog)
-	appRouter.DELETE("/:id", h.DeleteBlog)
+
+	appRouter.Use(middleware.Auth)
+	appRouter.POST("/", middleware.RequireRole(user.Member, user.Admin), h.CreateBlog)
+	appRouter.PATCH("/:id", middleware.RequireRole(user.Member, user.Admin), h.PatchUpdateBlog)
+	appRouter.POST("/:id", middleware.RequireRole(user.Member, user.Admin), h.PostUpdateBlog)
+	appRouter.POST("/:id/status", middleware.RequireRole(user.Member, user.Admin), h.UpdateBlogStatus)
+	appRouter.DELETE("/:id", middleware.RequireRole(user.Member, user.Admin), h.DeleteBlog)
 }
 
 func (h *BlogApiHandler) CreateBlog(ctx *gin.Context) {
 	// 1、获取用户请求
 	req := blog.NewCreateBlogRequest()
-	if err := ctx.Bind(req); err != nil {
+	if err := ctx.BindJSON(req); err != nil {
 		response_failed(ctx, err)
 	}
 	// req.Author = ctx.Query("author")

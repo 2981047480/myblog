@@ -22,4 +22,12 @@ func (e *ApiException) Error() string {
 	return e.Message
 }
 
+func (e *ApiException) WithMessage(message string) *ApiException {
+	e.Message = message
+	return e
+}
 
+func (e *ApiException) WithHttpCode(code int) *ApiException {
+	e.HttpCode = code
+	return e
+}

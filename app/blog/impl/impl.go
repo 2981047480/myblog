@@ -19,7 +19,7 @@ type Blogimpl struct {
 
 func (i *Blogimpl) Init() error {
 	var err error
-	i.DB, err = config.ReadDBConf(config.Filename).GetConn()
+	i.DB, err = config.C().GetConn()
 	if err != nil {
 		log.Print(err)
 		return err

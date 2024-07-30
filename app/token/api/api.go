@@ -26,7 +26,7 @@ type TokenApiHandler struct {
 func (h *TokenApiHandler) Init() error {
 	h.svc = ioc.ControllerImpl.Get(token.AppName).(token.Service)
 
-	subRouter := config.ReadDBConf(config.Filename).Application.GinRootRouter().Group("tokens")
+	subRouter := config.C().Application.GinRootRouter().Group("tokens")
 	h.Register(subRouter)
 	return nil
 }

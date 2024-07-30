@@ -14,7 +14,7 @@ import (
 var filename = "/Users/zephyrzhao/Documents/vblog/myblog/etc/db.yaml"
 
 func NewUserServiceImpl() *UserServiceImpl {
-	db, _ := config.ReadDBConf(filename).GetConn()
+	db, _ := config.C().GetConn()
 	return &UserServiceImpl{
 		database: db,
 	}
@@ -31,7 +31,7 @@ func init() {
 
 func (u *UserServiceImpl) Init() error {
 	var err error
-	u.database, err = config.ReadDBConf(filename).GetConn()
+	u.database, err = config.C().GetConn()
 	if err != nil {
 		log.Println("get DB failed")
 		return err
