@@ -6,8 +6,9 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import ArcoVue from '@arco-design/web-vue';
+import '@arco-themes/vue-mu-design/index.less';
 import ArcoVueIcon from '@arco-design/web-vue/es/icon';
-import '@arco-design/web-vue/dist/arco.css';
+// import '@arco-design/web-vue/dist/arco.css';
 
 const app = createApp(App)
 

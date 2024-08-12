@@ -17,6 +17,11 @@ const router = createRouter({
           path: "blogs/list",
           name: "BackendBlogList",
           component: () => import('../views/backend/Blog/BlogListView.vue')
+        },
+        {
+          path: "blogs/edit",
+          name: "BackendBlogEdit",
+          component: () => import('../views/backend/Blog/BlogEditView.vue')
         }
       ]
     }

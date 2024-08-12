@@ -2,8 +2,8 @@
     <div class="warpper">
         <a-layout>
             <div class="sider">
-                <div class="sider-header"></div>
-                <a-layout-sider collapsible :collapsed="collapsed"  :style="{width: '300px', height: 'calc(100vh - 30px)'}">
+                <h1 class="sider-header">博客后端</h1>
+                <a-layout-sider :style="{width: '300px', height: 'auto'}">
                     <a-menu @menu-item-click="routerHandler"
                     :style="{width: '100%', height: '100%'}"
                     :default-open-keys="['BlogManagement']"
@@ -79,37 +79,41 @@ var routerHandler = (v) => {
 </script>
 
 <style>
+    .arco-layout-sider{
+        box-shadow: none;
+    }
+
     .sider {
         width: auto;
-        height: 100vh;
-        border-right: 1px solid var(--color-border);
+        height: auto;
+        border: 1px solid var(--color-border);
+        backdrop-filter: blur(5px);
+        border-radius: 50px;
+        position: fixed;
+        padding-bottom: 50px;
+        top: 100px;
+        left: 100px;
     }
 
     .sider-header {
-        height: 40px;
+        height: 60px;
+        margin-top: 50px;
+        margin-left: 90px;
     }
 
     .warpper {
         width: 100%;
         height: 100%;
     }
-
-    .arco-menu-light .arco-menu-item.arco-menu-selected, .arco-menu-light .arco-menu-group-title.arco-menu-selected, .arco-menu-light .arco-menu-pop-header.arco-menu-selected, .arco-menu-light .arco-menu-inline-header.arco-menu-selected {
-        color: var(--color-text-2);
-    }
-    
-    .arco-menu-light .arco-menu-inline-header.arco-menu-selected .arco-icon, .arco-menu-light .arco-menu-inline-header.arco-menu-selected .arco-menu-icon {
-        color: var(--color-text-2);
-    }
     
     .arco-menu-light .arco-menu-item, .arco-menu-light .arco-menu-group-title, .arco-menu-light .arco-menu-pop-header, .arco-menu-light .arco-menu-inline-header {
         font-size: medium;
-        color: var(--color-text-2);
-        background-color: var(--color-menu-light-bg);
+        box-shadow: none; 
     }
 
     .arco-page-header {
         padding: 16px 0;
+        padding-left: 400px;
         border-bottom: 1px solid var(--color-border);
     }
 

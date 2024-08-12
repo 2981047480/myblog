@@ -11,6 +11,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@arco-themes/vue-mu-design": "^0.0.11",
     "axios": "^1.7.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
@@ -18,12 +19,14 @@
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.55.3",
+    "@arco-themes/vue-gi-demo": "^0.0.48",
     "@rushstack/eslint-patch": "^1.8.0",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vue/eslint-config-prettier": "^9.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
+    "less": "^4.2.0",
     "prettier": "^3.2.5",
     "vite": "^5.3.1",
     "vite-plugin-vue-devtools": "^7.3.1"
