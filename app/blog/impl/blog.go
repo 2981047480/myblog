@@ -144,7 +144,7 @@ func (i *Blogimpl) QueryBlog(ctx context.Context, in *blog.QueryBlogRequest) (*b
 	// 2、查询意味着需要有个标识，这里采用的是匹配标题的方法
 	query := i.DB.WithContext(ctx).Table(blog.TB_NAME)
 	if in.Keywords != "" {
-		query = query.Where("title like ?", "%s"+in.Keywords+"%")
+		query = query.Where("title like ?", "%"+in.Keywords+"%")
 	}
 
 	// 先得查count，这里需要有一个BlogSet对象

@@ -52,7 +52,7 @@
                 </a-layout-sider>
             </div>
             <a-layout>
-                <a-layout-header style="height:60px; ">
+                <a-layout-header style="height:60px;">
                   <a-page-header title="Header">
                     <template #extra>
                         quit
@@ -82,18 +82,28 @@ var routerHandler = (v) => {
     .arco-layout-sider{
         box-shadow: none;
     }
+    
+    .page {
+        background-color: white;
+        margin-left: 450px;
+        padding: 50px;
+        margin-top: 50px;
+        margin-right: 50px;
+        border-radius: 50px;
+    }
 
     .sider {
         width: auto;
         height: auto;
         border: 1px solid var(--color-border);
-        backdrop-filter: blur(5px);
         border-radius: 50px;
         position: fixed;
+        background-color: white;
         padding-bottom: 50px;
         top: 100px;
         left: 100px;
     }
+
 
     .sider-header {
         height: 60px;
@@ -104,6 +114,12 @@ var routerHandler = (v) => {
     .warpper {
         width: 100%;
         height: 100%;
+        background-color: var(--color-fill-2);
+    }
+
+    .arco-layout-has-sider {
+        flex-direction: row;
+        background-color: var(--color-fill-2);
     }
     
     .arco-menu-light .arco-menu-item, .arco-menu-light .arco-menu-group-title, .arco-menu-light .arco-menu-pop-header, .arco-menu-light .arco-menu-inline-header {
@@ -113,8 +129,7 @@ var routerHandler = (v) => {
 
     .arco-page-header {
         padding: 16px 0;
-        padding-left: 400px;
-        border-bottom: 1px solid var(--color-border);
+        padding-left: 430px;
     }
 
     .header {
