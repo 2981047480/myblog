@@ -12,3 +12,11 @@ export var GET_BLOG_LIST = (params) => {
 export var DELETE_BLOG = (id) => {
     return client.delete(`/vblog/api/v1/blogs/${id}`)
 }
+
+export var CREATE_BLOG = (req) => {
+    return client.post(`/vblog/api/v1/blogs`, req)
+}
+
+export var DESCRIBE_BLOG = (id) => {
+    return client.get(`/vblog/api/v1/blogs/${id}`)
+}

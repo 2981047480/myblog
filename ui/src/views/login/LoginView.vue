@@ -37,6 +37,7 @@
     import { reactive } from "vue";
     import { LOGIN } from '../../api/login/login'
     import { useRouter } from 'vue-router'
+    import app from '../../stores/app'
     document.body.setAttribute('arco-theme', 'dark')
 
     const isLoading=ref(false)
@@ -56,6 +57,7 @@
                 isLoading.value = true
                 const resp = await LOGIN(data.values)
                 
+                app.value.token = resp
                 router.push({name: "backend"})
                 document.body.removeAttribute('arco-theme');
                 console.log(resp)

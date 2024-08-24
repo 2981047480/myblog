@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@arco-themes/vue-mu-design": "^0.0.11",
+    "@vueuse/core": "^11.0.1",
     "axios": "^1.7.2",
+    "md-editor-v3": "^4.19.1",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"

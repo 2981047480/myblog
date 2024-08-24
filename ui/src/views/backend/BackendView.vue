@@ -53,9 +53,10 @@
             </div>
             <a-layout>
                 <a-layout-header style="height:60px;">
-                  <a-page-header title="Header">
+                  <a-page-header title="" :show-back="false">
                     <template #extra>
-                        quit
+                        <a-button type="primary" class="btnFrontend" @click="handleFrontend">前端</a-button>
+                        <a-button type="primary" :loading="isLoading" class="btnQuit" @click="handleQuit">退出</a-button>
                     </template>
                   </a-page-header>
                 </a-layout-header >
@@ -68,12 +69,32 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { LOGOUT } from '../../api/login/logout';
+import app from "@/stores/app"
 
 const router = useRouter()
+var isLoading = ref(false)
 
 var routerHandler = (v) => {
+    console.log(app.value.token)
     return router.push({name: v})
+}
+
+var handleFrontend = () => {
+    return router.push({name: "frontend"})
+}
+
+var handleQuit = () => {
+    try {
+        isLoading = true
+        console.log(app.value.token.refresh_token)
+        LOGOUT(app.value.token.refresh_token)
+        router.push({name: "login"})
+    }finally {
+        isLoading = false
+    }
 }
 
 </script>
@@ -83,6 +104,14 @@ var routerHandler = (v) => {
         box-shadow: none;
     }
     
+    .btnFrontend {
+        margin-right: 10px; 
+    }
+
+    .btnQuit {
+        margin-right: 50px;
+    }
+
     .page {
         background-color: white;
         margin-left: 450px;
@@ -125,11 +154,6 @@ var routerHandler = (v) => {
     .arco-menu-light .arco-menu-item, .arco-menu-light .arco-menu-group-title, .arco-menu-light .arco-menu-pop-header, .arco-menu-light .arco-menu-inline-header {
         font-size: medium;
         box-shadow: none; 
-    }
-
-    .arco-page-header {
-        padding: 16px 0;
-        padding-left: 430px;
     }
 
     .header {

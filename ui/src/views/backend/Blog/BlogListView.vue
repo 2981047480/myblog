@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <div class="bread">
+            <div class="breadList">
                 <a-breadcrumb>
                     <a-breadcrumb-item>博客后端</a-breadcrumb-item>
                     <a-breadcrumb-item>文章管理</a-breadcrumb-item>
@@ -10,13 +10,25 @@
             </div>
             <div class="search">
                 <a-input-search @search="handleSearch" :style="{width:'420px'}" placeholder="请输入要搜索的文章的关键字" button-text="Search" search-button/>       
+                <div style="padding-left: 5px;">
+                    <a-button type="primary" @click="$router.push({ name: 'BackendBlogEdit' })">新建博客</a-button>
+                </div>
             </div>
         </div>
-        <a-table :columns="columns" :data="data.Item" :loading="isLoading" show="true" :pagination="pagination" 
+        <a-table :data="data.Item" :loading="isLoading" show="true" :pagination="pagination" 
         align="center" @page-change="changePage" @page-size-change="changePageSize">
-            <template #options="{ record }">
-                <a-button size="small" type="text" @click="$router.push({ name: 'BackendBlogEdit' })">编辑</a-button>
-                <a-popconfirm content="确定要删除这篇博客？"  @ok="handleDelete(record)"><a-button size="small" type="text">删除</a-button></a-popconfirm>
+            <template #columns>
+                <a-table-column title="id" data-index="Id"></a-table-column>
+                <a-table-column title="title" data-index="title"></a-table-column>
+                <a-table-column title="author" data-index="author"></a-table-column>
+                <a-table-column title="summary" data-index="summary"></a-table-column>
+                <a-table-column title="tags" data-index="tags"></a-table-column>
+                <a-table-column align="center" title="options" data-index="options">
+                    <template #cell="{ record }">
+                        <a-button size="small" type="text" @click="$router.push({ name: 'BackendBlogEdit', query: { id: record.id } })">编辑</a-button>
+                        <a-popconfirm content="确定要删除这篇博客？"  @ok="handleDelete(record)"><a-button size="small" type="text">删除</a-button></a-popconfirm>
+                    </template>
+                </a-table-column>
             </template>
         </a-table>
     </div>
@@ -122,7 +134,7 @@
         justify-content: flex-end;
     }
 
-    .bread {
+    .breadList {
         float: left;
         display: flex;
     }

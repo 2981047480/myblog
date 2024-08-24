@@ -99,7 +99,7 @@ func (h *BlogApiHandler) QueryBlog(ctx *gin.Context) {
 
 func (h *BlogApiHandler) DescribeBlog(ctx *gin.Context) {
 	// 1、获取用户请求
-	blog_id_str := ctx.Query("id")
+	blog_id_str := ctx.Param("id")
 	var blog_id int
 	if blog_id_str != "" {
 		blog_id, _ = strconv.Atoi(blog_id_str)
