@@ -25,7 +25,7 @@
                 <a-table-column title="tags" data-index="tags"></a-table-column>
                 <a-table-column align="center" title="options" data-index="options">
                     <template #cell="{ record }">
-                        <a-button size="small" type="text" @click="$router.push({ name: 'BackendBlogEdit', query: { id: record.id } })">编辑</a-button>
+                        <a-button size="small" type="text" @click="$router.push({ name: 'BackendBlogEdit', query: { id: record.Id } })">编辑</a-button>
                         <a-popconfirm content="确定要删除这篇博客？"  @ok="handleDelete(record)"><a-button size="small" type="text">删除</a-button></a-popconfirm>
                     </template>
                 </a-table-column>
@@ -138,4 +138,5 @@
         float: left;
         display: flex;
     }
+
 </style>

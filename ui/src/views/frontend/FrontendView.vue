@@ -152,10 +152,6 @@ onMounted(()=>{
         box-shadow: none; 
     }
 
-    .arco-page-header {
-        padding: 16px 0;
-        padding-left: 430px;
-    }
 
     .header {
         height: 100px;
